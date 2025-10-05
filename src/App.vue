@@ -1,20 +1,17 @@
 <template>
-    <h2>resources</h2>
-    
-       
-            
-            <stored-resources :resources="storedResources"
-            ></stored-resources>
- 
-       
-    
+    <the-header title="RememberMe"></the-header>
+
+    <stored-resources :resources="storedResources"></stored-resources>
+
+
 </template>
 <script>
-import StoredResources from './componends/StoredResources.vue';
-
+import StoredResources from './componends/learningresources/StoredResources.vue';
+import TheHeader from './componends/layouts/TheHeader.vue';
 export default {
     components: {
-        StoredResources
+        StoredResources,
+        TheHeader
     },
     data() {
         return {
@@ -44,14 +41,14 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html {
-  font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
-  margin: 0;
+    margin: 0;
 }
 </style>

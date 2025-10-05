@@ -1,25 +1,29 @@
 <template>
-    <li>
-        <div>
-            <header>
-                <h3>{{ title }}</h3>
-                <button>Delete</button>
-            </header>
-        </div>
-        <p>{{ description }}</p>
-        <nav>
-            <a :href="url">Go to resource</a>
-        </nav>
-    </li>
+  <li>
+    <base-card>
+
+      <div>
+        <header>
+          <h3>{{ title }}</h3>
+          <button>Delete</button>
+        </header>
+      </div>
+      <p>{{ description }}</p>
+      <nav>
+        <a :href="url">Go to resource</a>
+      </nav>
+    </base-card>
+  </li>
 </template>
 <script>
+
 export default {
-    props: [
-        'id',
-        'title',
-        'description',
-        'url'
-    ]
+  props: [
+    'id',
+    'title',
+    'description',
+    'url'
+  ]
 }
 </script>
 <style scoped>
