@@ -1,9 +1,13 @@
 <template>
     <base-card>
-        <base-button @click="setSelectedTab('stored-resources')" :mode="selectedTab==='stored-resources'?'':'flat'">Stored Rsources</base-button>
-        <base-button @click="setSelectedTab('add-resource')" :mode="selectedTab==='add-resource'?'':'flat'" >Add Resource</base-button>
+        <base-button @click="setSelectedTab('stored-resources')"
+            :mode="selectedTab === 'stored-resources' ? '' : 'flat'">Stored Rsources</base-button>
+        <base-button @click="setSelectedTab('add-resource')" :mode="selectedTab === 'add-resource' ? '' : 'flat'">Add
+            Resource</base-button>
     </base-card>
-    <component :is="selectedTab" @add-data="addResource"></component>
+    <keep-alive>
+        <component :is="selectedTab" @add-data="addResource"></component>
+    </keep-alive>
 </template>
 <script>
 import StoredResources from './StoredResources.vue';
@@ -12,7 +16,7 @@ export default {
     components: {
         StoredResources,
         AddResource
-    },  
+    },
     data() {
         return {
             selectedTab: 'stored-resources',
@@ -37,23 +41,24 @@ export default {
     },
     provide() {
         return {
-            resources: this.storedResources
+            resources: this.storedResources,
+            addResource: this.addResource
         }
     },
-    methods:{
-        setSelectedTab(tab){
+    methods: {
+        setSelectedTab(tab) {
             this.selectedTab = tab;
         },
-        addResource(title, description, url){
-           console.log('In TheResources:'+title+','+description+','+url);
-           const newResource = {
-               id: 'r' + (this.storedResources.length + 1),
-               title: title,
-               description: description,
-               url: url
-           };
-              this.storedResources.push(newResource);
-                this.selectedTab = 'stored-resources';
+        addResource(title, description, url) {
+            console.log('In TheResources:' + title + ',' + description + ',' + url);
+            const newResource = {
+                id: 'r' + (this.storedResources.length + 1),
+                title: title,
+                description: description,
+                url: url
+            };
+            this.storedResources.unshift(newResource);
+            this.selectedTab = 'stored-resources';
         }
     }
 

@@ -3,15 +3,15 @@
         <form @submit.prevent="addData">
             <div class="form-control">
                 <label for="title">Title</label>
-                <input id="title" name="title" type="text" v-model="title"/>
+                <input id="title" name="title" type="text" ref="titleInput" />
             </div>
             <div class="form-control">
                 <label for="description">Description</label>
-                <textarea id="description" name="description" type="text" rows="3" v-model="description"></textarea>
+                <textarea id="description" name="description" type="text" rows="3" ref="descInput"></textarea>
             </div>
             <div class="form-control">
                 <label for="link">Link</label>
-                <input id="link" name="link" type="text" v-model="url"/>
+                <input id="link" name="link" type="text" ref="urlInput" />
             </div>
             <div>
                 <base-button type="submit">Add Resource</base-button>
@@ -20,21 +20,17 @@
     </base-card>
 </template>
 <script>
+
 export default {
-    emits: ['addData'],
-    data() {
-        return {
-            title: '',
-            description: '',
-            url: ''
-        }
-    },
+   
+    inject: ['addResource'],
     methods: {
-        addData(){
-            console.log('Submitted:'+this.title+','+this.description+','+this.url);
-          
-            this.$emit('addData', this.title, this.description, this.url);
-        }
+        addData() {
+            console.log('Submitted:' + this.$refs.titleInput.value + ',' + this.$refs.descInput.value + ',' + this.$refs.urlInput.value);
+
+            this.addResource(this.$refs.titleInput.value , this.$refs.descInput.value , this.$refs.urlInput.value);
+        },
+
     }
 }
 </script>

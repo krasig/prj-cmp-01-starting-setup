@@ -12,10 +12,11 @@
 import LearningResource from './LearningResource.vue';
 
 export default {
+    inject: ['resources'],
     components: {
         LearningResource
     },
-    inject: ['resources']
+   
 }
 </script>
 <style scoped>
