@@ -1,9 +1,9 @@
 <template>
     <base-card>
         <base-button @click="setSelectedTab('stored-resources')" :mode="selectedTab==='stored-resources'?'':'flat'">Stored Rsources</base-button>
-        <base-button @click="setSelectedTab('add-resource')" :mode="selectedTab==='add-resource'?'':'flat'">Add Resource</base-button>
+        <base-button @click="setSelectedTab('add-resource')" :mode="selectedTab==='add-resource'?'':'flat'" >Add Resource</base-button>
     </base-card>
-    <component :is="selectedTab"></component>
+    <component :is="selectedTab" @add-data="addResource"></component>
 </template>
 <script>
 import StoredResources from './StoredResources.vue';
@@ -43,6 +43,17 @@ export default {
     methods:{
         setSelectedTab(tab){
             this.selectedTab = tab;
+        },
+        addResource(title, description, url){
+           console.log('In TheResources:'+title+','+description+','+url);
+           const newResource = {
+               id: 'r' + (this.storedResources.length + 1),
+               title: title,
+               description: description,
+               url: url
+           };
+              this.storedResources.push(newResource);
+                this.selectedTab = 'stored-resources';
         }
     }
 
